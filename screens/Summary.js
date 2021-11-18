@@ -12,12 +12,14 @@ const Summary = ({ route, navigation }) => {
     container: {
       flex: 1,
       justifyContent: "center",
-      alignItems: "center",
+      alignItems: "stretch",
     },
     view: {
-      flex: 1,
-      flexDirection: "row",
-      justifyContent: "space-between",
+      margin: 10,
+      padding: 5,
+      borderWidth: 1,
+      borderColor: "#333",
+      borderRadius: 5,
     },
     key: {
       fontSize: 18,
@@ -35,17 +37,21 @@ const Summary = ({ route, navigation }) => {
       textAlign: "center",
     },
   });
+  const { firstName, lastName, fullName, dob, number, email } = route.params;
   return (
     <SafeAreaView style={styles.container}>
-      {route.params &&
-        Object.keys(route.params).map((el, i, arr) => (
-          <View style={styles.view} key={i}>
-            <Text style={styles.key}>{arr[i]}</Text>
-            <Text style={styles.key}>:</Text>
-            <Text style={styles.key}>{route.params[el]}</Text>
-          </View>
-        ))}
-
+      <View style={styles.view}>
+        <Text>Full Name : {fullName}</Text>
+      </View>
+      <View style={styles.view}>
+        <Text>Date of birth : {`${dob.split(" ").slice(0, 4).join(" ")}`}</Text>
+      </View>
+      <View style={styles.view}>
+        <Text>Number : {`${number}`}</Text>
+      </View>
+      <View style={styles.view}>
+        <Text>Email : {`${email}`}</Text>
+      </View>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.goBack()}
