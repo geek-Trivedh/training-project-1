@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import schema from "../utils/schema";
+import signUpSchema from "../utils/signUpSchema";
 import Input from "../components/Input";
 import DatePick from "../components/DatePick";
 
@@ -30,7 +30,7 @@ export default function SignUpForm({ navigation }) {
       fullName: "",
       dob: new Date("2000-12-12"),
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(signUpSchema),
   });
   const onSubmit = (data) => {
     navigation.navigate("Summary", data);

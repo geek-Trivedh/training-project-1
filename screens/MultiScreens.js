@@ -15,22 +15,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const ScreenContainer = ({ children }) => (
-  <View style={styles.container}>{children}</View>
-);
-
-export const Home = ({ navigation }) => (
-  <ScreenContainer>
-    <Text>Welcome to the app</Text>
-    <Button
-      title="Sign Up"
-      onPress={() =>
-        navigation.navigate("SignUpForm", { name: "Sign Up Form" })
-      }
-    />
-  </ScreenContainer>
-);
-
 export const Details = ({ route }) => (
   <ScreenContainer>
     <Text>Details Screen</Text>

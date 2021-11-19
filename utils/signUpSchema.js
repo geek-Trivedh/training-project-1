@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import phoneRegExp from "./regex";
 
-export default schema = yup.object().shape({
+export default signUpSchema = yup.object().shape({
   firstName: yup
     .string()
     .required("This is a required field")

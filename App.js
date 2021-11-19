@@ -3,8 +3,8 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { Home } from "./screens/MultiScreens";
-import SignUpForm from "./screens/Form";
+import Home from "./screens/Home";
+import SignUpForm from "./screens/SignUpForm";
 import Summary from "./screens/Summary";
 import SignIn from "./screens/SignIn";
 
@@ -34,6 +34,7 @@ const App = () => {
       <Drawer.Navigator>
         <Drawer.Screen name="Home Drawer" component={HomeStackScreen} />
         <Drawer.Screen name="SignUpForm" component={SignUpForm} />
+        <Drawer.Screen name="SignIn" component={SignIn} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
