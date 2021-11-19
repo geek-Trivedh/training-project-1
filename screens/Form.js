@@ -28,6 +28,7 @@ export default function SignUpForm({ navigation }) {
       firstName: "",
       lastName: "",
       fullName: "",
+      dob: new Date("2000-12-12"),
     },
     resolver: yupResolver(schema),
   });
@@ -177,7 +178,7 @@ export default function SignUpForm({ navigation }) {
                 Date of Birth
               </Text>
               <DatePick
-                errors={errors.date}
+                errors={errors.dob}
                 mode={"date"}
                 onDateChange={onChange}
                 date={value}

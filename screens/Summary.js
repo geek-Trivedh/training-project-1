@@ -58,6 +58,18 @@ const Summary = ({ route, navigation }) => {
       >
         <Text style={styles.btnText}>Edit</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("SignIn")}
+      >
+        <Text style={styles.btnText}>Sign In</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("Home")}
+      >
+        <Text style={styles.btnText}>Home</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };

@@ -6,6 +6,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Home } from "./screens/MultiScreens";
 import SignUpForm from "./screens/Form";
 import Summary from "./screens/Summary";
+import SignIn from "./screens/SignIn";
 
 const HomeStack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -23,6 +24,7 @@ const HomeStackScreen = () => (
       options={{ title: "Sign Up Form" }}
     />
     <HomeStack.Screen name="Summary" component={Summary} />
+    <HomeStack.Screen name="SignIn" component={SignIn} />
   </HomeStack.Navigator>
 );
 

@@ -18,7 +18,7 @@ export default schema = yup.object().shape({
     .required("This is a required field")
     .min(3, "Email is too short")
     .max(30, "Email is too long"),
-  // fullName: yup.string().required("This is a required field"),
+  fullName: yup.string().required("This is a required field"),
   number: yup
     .string()
     .required("This is a required field")
