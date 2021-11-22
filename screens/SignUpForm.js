@@ -13,8 +13,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import signUpSchema from "../utils/signUpSchema";
 import Input from "../components/Input";
 import DatePick from "../components/DatePick";
+import { connect } from "react-redux";
+import { saveSignUpDetails } from "../actions/saveSignUpDetailAction";
 
-export default function SignUpForm({ navigation }) {
+function SignUpForm(props) {
   const {
     control,
     handleSubmit,
@@ -33,7 +35,10 @@ export default function SignUpForm({ navigation }) {
     resolver: yupResolver(signUpSchema),
   });
   const onSubmit = (data) => {
-    navigation.navigate("Summary", data);
+    console.log(props.reduxSaveSignUpDetail);
+    console.log(data);
+    props.reduxSaveSignUpDetail(data);
+    props.navigation.navigate("Summary", data);
   };
 
   const styles = StyleSheet.create({
@@ -60,7 +65,6 @@ export default function SignUpForm({ navigation }) {
       textAlign: "center",
     },
   });
-  console.log(`${getValues("firstName")}`);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -198,3 +202,15 @@ export default function SignUpForm({ navigation }) {
     </SafeAreaView>
   );
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    reduxSaveSignUpDetail: (signUpDetails) => {
+      console.log("SIGNUP_DETAILS", signUpDetails);
+      console.log(saveSignUpDetails);
+      return dispatch(saveSignUpDetails(signUpDetails));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SignUpForm);

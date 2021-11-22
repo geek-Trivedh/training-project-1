@@ -7,6 +7,9 @@ import Home from "./screens/Home";
 import SignUpForm from "./screens/SignUpForm";
 import Summary from "./screens/Summary";
 import SignIn from "./screens/SignIn";
+import { PersistGate } from "redux-persist/es/integration/react";
+import { Provider } from "react-redux";
+import { store, persistor } from "./store/store";
 
 const HomeStack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -30,13 +33,18 @@ const HomeStackScreen = () => (
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator>
-        <Drawer.Screen name="Home Drawer" component={HomeStackScreen} />
-        <Drawer.Screen name="SignUpForm" component={SignUpForm} />
-        <Drawer.Screen name="SignIn" component={SignIn} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    // Redux: Global Store
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <Drawer.Navigator>
+            <Drawer.Screen name="Home Drawer" component={HomeStackScreen} />
+            <Drawer.Screen name="SignUpForm" component={SignUpForm} />
+            <Drawer.Screen name="SignIn" component={SignIn} />
+          </Drawer.Navigator>
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
   );
 };
 

@@ -20,7 +20,6 @@ export default function DropDown(props) {
       setValue={setValue}
       setItems={setItems}
       onChangeValue={(text) => {
-        console.log(text);
         props.onChangeValue();
       }}
     />

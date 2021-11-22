@@ -6,8 +6,8 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-
-const Summary = ({ route, navigation }) => {
+import { connect } from "react-redux";
+const Summary = ({ route, navigation, signUpDetails }) => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -37,20 +37,23 @@ const Summary = ({ route, navigation }) => {
       textAlign: "center",
     },
   });
-  const { firstName, lastName, fullName, dob, number, email } = route.params;
+  // const { firstName, lastName, fullName, dob, number, email } = route.params;
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.view}>
-        <Text>Full Name : {fullName}</Text>
+        <Text>Full Name : {signUpDetails.fullName}</Text>
       </View>
       <View style={styles.view}>
-        <Text>Date of birth : {`${dob.split(" ").slice(0, 4).join(" ")}`}</Text>
+        <Text>
+          Date of birth :{" "}
+          {`${signUpDetails.dob.split(" ").slice(0, 4).join(" ")}`}
+        </Text>
       </View>
       <View style={styles.view}>
-        <Text>Number : {`${number}`}</Text>
+        <Text>Number : {`${signUpDetails.number}`}</Text>
       </View>
       <View style={styles.view}>
-        <Text>Email : {`${email}`}</Text>
+        <Text>Email : {`${signUpDetails.email}`}</Text>
       </View>
       <TouchableOpacity
         style={styles.button}
@@ -74,4 +77,10 @@ const Summary = ({ route, navigation }) => {
   );
 };
 
-export default Summary;
+const mapStateToProps = (state) => {
+  console.log("STATE", state);
+  return {
+    signUpDetails: state.signUpDetails,
+  };
+};
+export default connect(mapStateToProps, null)(Summary);
