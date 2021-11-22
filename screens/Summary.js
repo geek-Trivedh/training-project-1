@@ -78,7 +78,6 @@ const Summary = ({ route, navigation, signUpDetails }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log("STATE", state);
   return {
     signUpDetails: state.signUpDetails,
   };

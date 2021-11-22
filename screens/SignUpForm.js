@@ -35,36 +35,10 @@ function SignUpForm(props) {
     resolver: yupResolver(signUpSchema),
   });
   const onSubmit = (data) => {
-    console.log(props.reduxSaveSignUpDetail);
-    console.log(data);
     props.reduxSaveSignUpDetail(data);
     props.navigation.navigate("Summary", data);
   };
 
-  const styles = StyleSheet.create({
-    container: {
-      paddingTop: 20,
-    },
-
-    heading: {
-      fontSize: 24,
-      fontWeight: "700",
-      margin: 10,
-      textAlign: "center",
-    },
-    signUpButton: {
-      borderWidth: 1,
-      borderColor: "#007bff",
-      backgroundColor: "#007bff",
-      padding: 15,
-      margin: 5,
-    },
-    signUpText: {
-      color: "#fff",
-      fontSize: 20,
-      textAlign: "center",
-    },
-  });
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -203,11 +177,34 @@ function SignUpForm(props) {
   );
 }
 
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 20,
+  },
+
+  heading: {
+    fontSize: 24,
+    fontWeight: "700",
+    margin: 10,
+    textAlign: "center",
+  },
+  signUpButton: {
+    borderWidth: 1,
+    borderColor: "#007bff",
+    backgroundColor: "#007bff",
+    padding: 15,
+    margin: 5,
+  },
+  signUpText: {
+    color: "#fff",
+    fontSize: 20,
+    textAlign: "center",
+  },
+});
+
 const mapDispatchToProps = (dispatch) => {
   return {
     reduxSaveSignUpDetail: (signUpDetails) => {
-      console.log("SIGNUP_DETAILS", signUpDetails);
-      console.log(saveSignUpDetails);
       return dispatch(saveSignUpDetails(signUpDetails));
     },
   };
