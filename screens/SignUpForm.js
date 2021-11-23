@@ -1,20 +1,16 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import {
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  ScrollView,
-} from "react-native";
+import { Text, SafeAreaView, StyleSheet, View, ScrollView } from "react-native";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { connect } from "react-redux";
 
-import signUpSchema from "../utils/signUpSchema";
 import Input from "../components/Input";
 import DatePick from "../components/DatePick";
-import { connect } from "react-redux";
 import { saveSignUpDetails } from "../actions/saveSignUpDetailAction";
+import ButtonNative from "../components/ButtonNative";
+import * as message from "../constants/constants";
+import { showToast } from "../utils/Toast";
+import { signUpSchema } from "../utils/schema";
 
 function SignUpForm(props) {
   const {
@@ -34,15 +30,24 @@ function SignUpForm(props) {
     },
     resolver: yupResolver(signUpSchema),
   });
+
   const onSubmit = (data) => {
     props.reduxSaveSignUpDetail(data);
-    props.navigation.navigate("Summary", data);
+    props.navigation.navigate("SignIn");
+    showToast(message.SUCCESS, message.ACC_CREATED, message.SIGN_IN);
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <Text>Full Name : {`${watch("firstName")} ${watch("lastName")}`}</Text>
+        <View>
+          <Text>
+            Full Name :{" "}
+            <Text style={styles.fullName}>{`${watch("firstName")} ${watch(
+              "lastName"
+            )}`}</Text>
+          </Text>
+        </View>
         <Controller
           control={control}
           render={({ field: { onChange, value } }) => (
@@ -165,13 +170,11 @@ function SignUpForm(props) {
           )}
           name="dob"
         />
-
-        <TouchableOpacity
-          style={styles.signUpButton}
-          onPress={handleSubmit(onSubmit)}
-        >
-          <Text style={styles.signUpText}>Sign Up</Text>
-        </TouchableOpacity>
+        <ButtonNative
+          style={{}}
+          btnAction={handleSubmit(onSubmit)}
+          title={"Sign Up"}
+        />
       </ScrollView>
     </SafeAreaView>
   );
@@ -181,24 +184,8 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
   },
-
-  heading: {
-    fontSize: 24,
-    fontWeight: "700",
-    margin: 10,
-    textAlign: "center",
-  },
-  signUpButton: {
-    borderWidth: 1,
-    borderColor: "#007bff",
-    backgroundColor: "#007bff",
-    padding: 15,
-    margin: 5,
-  },
-  signUpText: {
-    color: "#fff",
-    fontSize: 20,
-    textAlign: "center",
+  fullName: {
+    color: "green",
   },
 });
 

@@ -4,13 +4,15 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { PersistGate } from "redux-persist/es/integration/react";
 import { Provider } from "react-redux";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
+import DashBoard from "./screens/DashBoard";
 import Home from "./screens/Home";
+import SignIn from "./screens/SignIn";
 import SignUpForm from "./screens/SignUpForm";
 import Summary from "./screens/Summary";
-import SignIn from "./screens/SignIn";
+import Todos from "./screens/Todos";
 import { store, persistor } from "./store/store";
-import DashBoard from "./screens/DashBoard";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -29,6 +31,7 @@ const HomeStackScreen = () => (
       component={SignIn}
     />
     <HomeStack.Screen name="Dashboard" component={DashBoard} />
+    <HomeStack.Screen name="Todos" component={Todos} />
   </HomeStack.Navigator>
 );
 
@@ -41,6 +44,7 @@ const App = () => {
           <HomeStackScreen />
         </NavigationContainer>
       </PersistGate>
+      <Toast />
     </Provider>
   );
 };

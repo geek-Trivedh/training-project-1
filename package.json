@@ -27,6 +27,7 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.9.0",
     "react-native-simple-radio-button": "^2.7.4",
+    "react-native-toast-message": "^2.0.2",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
     "redux-logger": "^3.0.6",

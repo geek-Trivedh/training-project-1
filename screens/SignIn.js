@@ -5,12 +5,21 @@ import { useForm, Controller } from "react-hook-form";
 import ButtonNative from "../components/ButtonNative";
 import Input from "../components/Input";
 import { store } from "../store/store";
+import { showToast } from "../utils/Toast";
+import {
+  ERROR,
+  SIGN_IN,
+  SIGN_IN_ERROR,
+  SIGN_IN_SUCCESS,
+  SUCCESS,
+} from "../constants/constants";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { signInSchema } from "../utils/schema";
 
 const SignIn = ({ navigation }) => {
   const {
     control,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm({
     mode: "onChange",
@@ -18,6 +27,7 @@ const SignIn = ({ navigation }) => {
       email: store?.getState()?.signUpDetails?.email || "",
       password: "",
     },
+    resolver: yupResolver(signInSchema),
   });
 
   const onSubmit = ({ email, password }) => {
@@ -26,11 +36,9 @@ const SignIn = ({ navigation }) => {
       store.getState().signUpDetails.password === password
     ) {
       navigation.navigate("Dashboard");
+      showToast(SUCCESS, SIGN_IN_SUCCESS);
     } else {
-      setError("password", {
-        type: "manual",
-        message: "Email and password does not match",
-      });
+      showToast(ERROR, SIGN_IN_ERROR);
     }
   };
   return (
@@ -51,7 +59,6 @@ const SignIn = ({ navigation }) => {
             <Input
               onChangeText={onChange}
               value={value}
-              errors={errors.email}
               placeholder={"Email"}
             />
           )}
@@ -77,8 +84,7 @@ const SignIn = ({ navigation }) => {
         </View>
         <View>
           <ButtonNative
-            text={"Sign In"}
-            textColor={"#fff"}
+            title={"Sign In"}
             borderColor={"#ea4c89"}
             backgroundColor={"#ea4c89"}
             btnAction={handleSubmit(onSubmit)}

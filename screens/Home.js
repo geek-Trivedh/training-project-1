@@ -1,20 +1,49 @@
 import React from "react";
-import { Text, Button, StyleSheet, View } from "react-native";
-import ScreenContainer from "./ScreenContainer";
+import { Text, StyleSheet, View } from "react-native";
+
+import ButtonNative from "../components/ButtonNative";
+import Header from "../components/Header";
+
 export default Home = ({ navigation }) => (
-  <ScreenContainer>
-    <View>
-      <Text>Welcome to the app</Text>
-      <Button
-        title="Sign Up"
-        onPress={() =>
-          navigation.navigate("SignUpForm", { name: "Sign Up Form" })
-        }
-      />
-      <Button
-        title="Sign In"
-        onPress={() => navigation.navigate("SignIn", { name: "Sign In Form" })}
-      />
+  <View style={styles.screen}>
+    <Header title={"Welcome to the app"} />
+    <View style={styles.body}>
+      <View style={styles.buttonContainer}>
+        <ButtonNative
+          style={styles.button}
+          title="Sign Up"
+          btnAction={() =>
+            navigation.navigate("SignUpForm", { name: "Sign Up Form" })
+          }
+        />
+        <ButtonNative
+          style={styles.button}
+          title="Sign In"
+          btnAction={() =>
+            navigation.navigate("SignIn", { name: "Sign In Form" })
+          }
+        />
+      </View>
     </View>
-  </ScreenContainer>
+  </View>
 );
+
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
+  body: {
+    flex: 1,
+  },
+  buttonContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  button: {
+    width: 300,
+    maxWidth: "80%",
+    backgroundColor: "#007bff",
+    borderColor: "#007bff",
+  },
+});
