@@ -1,66 +1,54 @@
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
 import React from "react";
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { CreateAccount, SignIn, Profile, Home,Search,Details,Search2 } from './screens/MultiScreens';
-import SignUpForm from './components/Form';
-import Summary from './components/Summary'
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { PersistGate } from "redux-persist/es/integration/react";
+import { Provider } from "react-redux";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
-const AuthStack = createNativeStackNavigator();
-const Tabs = createBottomTabNavigator();
+import DashBoard from "./screens/DashBoard";
+import Home from "./screens/Home";
+import SignIn from "./screens/SignIn";
+import SignUpForm from "./screens/SignUpForm";
+import Summary from "./screens/Summary";
+import Todos from "./screens/Todos";
+import { store } from "./store";
+
 const HomeStack = createNativeStackNavigator();
-const SearchStack = createNativeStackNavigator();
-const ProfileStack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
-const SignUpStack = createNativeStackNavigator();
 
-const HomeStackScreen = ()=>(
+const HomeStackScreen = () => (
   <HomeStack.Navigator>
-    <HomeStack.Screen  options={{headerShown: false}} name="Home" component={Home} />
-    <HomeStack.Screen name="SignUpForm" component={SignUpForm} options={{title:"Sign Up Form"}} />
-   <HomeStack.Screen name="Summary" component={Summary} />
-   
+    <HomeStack.Screen name="Home" component={Home} />
+    <HomeStack.Screen
+      name="SignUpForm"
+      component={SignUpForm}
+      options={{ title: "Sign Up" }}
+    />
+    <HomeStack.Screen name="Summary" component={Summary} />
+    <HomeStack.Screen
+      name="SignIn"
+      options={{ title: "Sign In" }}
+      component={SignIn}
+    />
+    <HomeStack.Screen
+      options={{ headerShown: false }}
+      name="Dashboard"
+      component={DashBoard}
+    />
+    <HomeStack.Screen name="Todos" component={Todos} />
   </HomeStack.Navigator>
-)
-// const SignUpStackScreen = ()=>(
-//   <SignUpStack.Navigator >
-//     <SignUpStack.Screen name="SignUpForm" component={SignUpForm} />
-//     <SignUpStack.Screen name="Summary" component={Summary} />
-//   </SignUpStack.Navigator>
-// )
+);
 
-const SearchStackScreen = ()=>(
-  <SearchStack.Navigator>
-    <SearchStack.Screen  name="Search" component={Search} />
-    <SearchStack.Screen name="Search2" component={Search2} />
-  </SearchStack.Navigator>
-)
-const ProfileStackScreen =()=>(
-  <ProfileStack.Navigator>
-    <ProfileStack.Screen name="Profile" component={Profile} />
-  </ProfileStack.Navigator>
-)
-
-const TabsScreen = ()=>(
-  <Tabs.Navigator>
-  <Tabs.Screen options={{headerShown: false}} name="Home Tab" component={HomeStackScreen} />
-  <Tabs.Screen  name="Search" component={SearchStackScreen} />
-</Tabs.Navigator>
-)
-
-const App = ()=>{
+const App = () => {
   return (
-   <NavigationContainer>
-    <Drawer.Navigator >
-      <Drawer.Screen  name="Home Drawer" component={TabsScreen} />
-      <Drawer.Screen name="Profile" component={ProfileStackScreen} />
-    </Drawer.Navigator>
-  {/* <SignUpStackScreen /> */}
-
-  </NavigationContainer>
-  )
-}
+    // Redux: Global Store
+    <Provider store={store}>
+      <NavigationContainer>
+        <HomeStackScreen />
+      </NavigationContainer>
+      <Toast />
+    </Provider>
+  );
+};
 
 export default App;

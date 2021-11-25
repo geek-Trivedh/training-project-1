@@ -1,0 +1,7 @@
+export const SIGN_UP_INFO = "SIGN_UP_INFO";
+export const ADD_TODO = "ADD_TODO";
+export const REMOVE_TODO = "REMOVE_TODO";
+export const TOGGLE_TODO = "TOGGLE_TODO";
+export const COMPLETED_TODOS = "COMPLETED_TODOS";
+export const NOT_COMPLETED_TODOS = "NOT_COMPLETED_TODOS";
+export const CLEAR_ALL_FILTERS = "CLEAR_ALL_FILTERS";
