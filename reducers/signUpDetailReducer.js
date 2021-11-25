@@ -10,7 +10,7 @@ const initialState = {
 
 const signUpDetailReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "SAVE_SIGN_UP_DETAIL":
+    case "SIGN_UP_INFO":
       return {
         ...state,
         signUpDetails: action.signUpDetails,

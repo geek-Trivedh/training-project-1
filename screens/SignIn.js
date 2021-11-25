@@ -4,11 +4,10 @@ import { useForm, Controller } from "react-hook-form";
 
 import ButtonNative from "../components/ButtonNative";
 import Input from "../components/Input";
-import { store } from "../store/store";
+import { store } from "../store";
 import { showToast } from "../utils/Toast";
 import {
   ERROR,
-  SIGN_IN,
   SIGN_IN_ERROR,
   SIGN_IN_SUCCESS,
   SUCCESS,
@@ -24,7 +23,7 @@ const SignIn = ({ navigation }) => {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      email: store?.getState()?.signUpDetails?.email || "",
+      email: store?.getState()?.signUpDetailReducer?.signUpDetails?.email || "",
       password: "",
     },
     resolver: yupResolver(signInSchema),
@@ -32,8 +31,8 @@ const SignIn = ({ navigation }) => {
 
   const onSubmit = ({ email, password }) => {
     if (
-      store.getState().signUpDetails.email === email &&
-      store.getState().signUpDetails.password === password
+      store.getState().signUpDetailReducer.signUpDetails.email === email &&
+      store.getState().signUpDetailReducer.signUpDetails.password === password
     ) {
       navigation.navigate("Dashboard");
       showToast(SUCCESS, SIGN_IN_SUCCESS);
@@ -60,6 +59,7 @@ const SignIn = ({ navigation }) => {
               onChangeText={onChange}
               value={value}
               placeholder={"Email"}
+              errors={errors.email}
             />
           )}
           name="email"

@@ -6,11 +6,11 @@ import { connect } from "react-redux";
 
 import Input from "../components/Input";
 import DatePick from "../components/DatePick";
-import { saveSignUpDetails } from "../actions/saveSignUpDetailAction";
 import ButtonNative from "../components/ButtonNative";
 import * as message from "../constants/constants";
 import { showToast } from "../utils/Toast";
 import { signUpSchema } from "../utils/schema";
+import { saveSignUpDetailsAction } from "../actions";
 
 function SignUpForm(props) {
   const {
@@ -32,7 +32,7 @@ function SignUpForm(props) {
   });
 
   const onSubmit = (data) => {
-    props.reduxSaveSignUpDetail(data);
+    props.dispatch(saveSignUpDetailsAction(data));
     props.navigation.navigate("SignIn");
     showToast(message.SUCCESS, message.ACC_CREATED, message.SIGN_IN);
   };
@@ -189,12 +189,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    reduxSaveSignUpDetail: (signUpDetails) => {
-      return dispatch(saveSignUpDetails(signUpDetails));
-    },
-  };
-};
-
-export default connect(null, mapDispatchToProps)(SignUpForm);
+export default connect()(SignUpForm);

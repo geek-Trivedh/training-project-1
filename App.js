@@ -12,7 +12,7 @@ import SignIn from "./screens/SignIn";
 import SignUpForm from "./screens/SignUpForm";
 import Summary from "./screens/Summary";
 import Todos from "./screens/Todos";
-import { store, persistor } from "./store/store";
+import { store } from "./store";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -30,7 +30,11 @@ const HomeStackScreen = () => (
       options={{ title: "Sign In" }}
       component={SignIn}
     />
-    <HomeStack.Screen name="Dashboard" component={DashBoard} />
+    <HomeStack.Screen
+      options={{ headerShown: false }}
+      name="Dashboard"
+      component={DashBoard}
+    />
     <HomeStack.Screen name="Todos" component={Todos} />
   </HomeStack.Navigator>
 );
@@ -39,11 +43,9 @@ const App = () => {
   return (
     // Redux: Global Store
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <NavigationContainer>
-          <HomeStackScreen />
-        </NavigationContainer>
-      </PersistGate>
+      <NavigationContainer>
+        <HomeStackScreen />
+      </NavigationContainer>
       <Toast />
     </Provider>
   );
